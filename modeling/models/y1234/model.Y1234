@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="ASCII"?>
+<mm:SocialMediaPlatform xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mm="Y1234" xmi:id="_3OLtMLiDEe6xmeNecUD1vQ" name="Platform">
+  <microservices xmi:id="_3OLtMbiDEe6xmeNecUD1vQ" name="video-microservice">
+    <controllers xmi:id="_3OLtMriDEe6xmeNecUD1vQ" name="UsersController" path="/users">
+      <resources xmi:id="_3OLtM7iDEe6xmeNecUD1vQ" name="list" path="/" type="Get"/>
+      <resources xmi:id="_3OLtNLiDEe6xmeNecUD1vQ" name="add" path="/" type="Post" requestType="UserDTO"/>
+      <resources xmi:id="_3OLtNbiDEe6xmeNecUD1vQ" name="getUser" path="/{userId}" type="Get">
+        <queryParameters xmi:id="_3OLtNriDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+      </resources>
+      <resources xmi:id="_3OLtN7iDEe6xmeNecUD1vQ" name="addVideo" path="/{userId}/videos" type="Post" requestType="VideoDTO">
+        <queryParameters xmi:id="_3OLtOLiDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+      </resources>
+      <resources xmi:id="_3OLtObiDEe6xmeNecUD1vQ" name="getUserVideos" path="/{userId}/videos" type="Get">
+        <queryParameters xmi:id="_3OLtOriDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+      </resources>
+      <resources xmi:id="_3OLtO7iDEe6xmeNecUD1vQ" name="getViewedVideos" path="/{userId}/videos/viewed" type="Get">
+        <queryParameters xmi:id="_3OLtPLiDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+      </resources>
+      <resources xmi:id="_3OLtPbiDEe6xmeNecUD1vQ" name="getLikedVideos" path="/{userId}/videos/liked" type="Get">
+        <queryParameters xmi:id="_3OLtPriDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+      </resources>
+      <resources xmi:id="_3OLtP7iDEe6xmeNecUD1vQ" name="getDislikedVideos" path="/{userId}/videos/disliked" type="Get">
+        <queryParameters xmi:id="_3OLtQLiDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+      </resources>
+      <resources xmi:id="_3OLtQbiDEe6xmeNecUD1vQ" name="viewVideo" path="/{userId}/videos/viewed/{videoId}" type="Put">
+        <queryParameters xmi:id="_3OLtQriDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+        <queryParameters xmi:id="_3OLtQ7iDEe6xmeNecUD1vQ" type="Long" name="videoId"/>
+      </resources>
+      <resources xmi:id="_3OLtRLiDEe6xmeNecUD1vQ" name="likeVideo" path="/{userId}/videos/liked/{videoId}" type="Put">
+        <queryParameters xmi:id="_3OLtRbiDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+        <queryParameters xmi:id="_3OLtRriDEe6xmeNecUD1vQ" type="Long" name="videoId"/>
+      </resources>
+      <resources xmi:id="_3OLtR7iDEe6xmeNecUD1vQ" name="dislikeVideo" path="/{userId}/videos/disliked/{videoId}" type="Put">
+        <queryParameters xmi:id="_3OLtSLiDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+        <queryParameters xmi:id="_3OLtSbiDEe6xmeNecUD1vQ" type="Long" name="videoId"/>
+      </resources>
+    </controllers>
+    <controllers xmi:id="_3OLtSriDEe6xmeNecUD1vQ" name="VideosController" path="/videos">
+      <resources xmi:id="_3OLtS7iDEe6xmeNecUD1vQ" name="list" path="/" type="Get"/>
+    </controllers>
+    <controllers xmi:id="_3OLtTLiDEe6xmeNecUD1vQ" name="HashtagController" path="/hashtags">
+      <resources xmi:id="_3OLtTbiDEe6xmeNecUD1vQ" name="list" path="/" type="Get"/>
+      <resources xmi:id="_3OLtTriDEe6xmeNecUD1vQ" name="getHashtag" path="/{hashtagId}" type="Get">
+        <queryParameters xmi:id="_3OLtT7iDEe6xmeNecUD1vQ" type="Long" name="hashtagId"/>
+      </resources>
+      <resources xmi:id="_3OLtULiDEe6xmeNecUD1vQ" name="getHashtagVideos" path="/{hashtagId}/videos" type="Get">
+        <queryParameters xmi:id="_3OLtUbiDEe6xmeNecUD1vQ" type="Long" name="hashtagId"/>
+      </resources>
+    </controllers>
+    <entities xmi:id="_3OLtUriDEe6xmeNecUD1vQ" name="User">
+      <fields xmi:id="_3OLtU7iDEe6xmeNecUD1vQ" type="Long" name="id"/>
+      <fields xmi:id="_3OLtVLiDEe6xmeNecUD1vQ" type="String" name="username"/>
+      <relations xmi:id="_3OLtVbiDEe6xmeNecUD1vQ" name="VMUserVideos" type="OneToMany" primary="false" dataType="Set" fieldName="videos" to="_3OLtXLiDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtVriDEe6xmeNecUD1vQ" name="VMUserViewedVideos" type="ManyToMany" primary="true" dataType="Set" fieldName="viewedVideos" to="_3OLtXriDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtV7iDEe6xmeNecUD1vQ" name="VMUserLikedVideos" type="ManyToMany" primary="true" dataType="Set" fieldName="likedVideos" to="_3OLtX7iDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtWLiDEe6xmeNecUD1vQ" name="VMUserDislikedVideos" type="ManyToMany" primary="true" dataType="Set" fieldName="dislikedVideos" to="_3OLtYLiDEe6xmeNecUD1vQ"/>
+    </entities>
+    <entities xmi:id="_3OLtWbiDEe6xmeNecUD1vQ" name="Video">
+      <fields xmi:id="_3OLtWriDEe6xmeNecUD1vQ" type="Long" name="id"/>
+      <fields xmi:id="_3OLtW7iDEe6xmeNecUD1vQ" type="String" name="title"/>
+      <relations xmi:id="_3OLtXLiDEe6xmeNecUD1vQ" name="VMVideoUser" type="ManyToOne" primary="true" fieldName="user" to="_3OLtVbiDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtXbiDEe6xmeNecUD1vQ" name="VMVideoHashtags" type="ManyToMany" primary="true" dataType="Set" fieldName="hashtags" to="_3OLtZLiDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtXriDEe6xmeNecUD1vQ" name="VMVideoViewedBy" type="ManyToMany" primary="false" dataType="Set" fieldName="viewedBy" to="_3OLtVriDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtX7iDEe6xmeNecUD1vQ" name="VMVideoLikedBy" type="ManyToMany" primary="false" dataType="Set" fieldName="likedBy" to="_3OLtV7iDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtYLiDEe6xmeNecUD1vQ" name="VMVideoDislikedBy" type="ManyToMany" primary="false" dataType="Set" fieldName="dislikedBy" to="_3OLtWLiDEe6xmeNecUD1vQ"/>
+    </entities>
+    <entities xmi:id="_3OLtYbiDEe6xmeNecUD1vQ" name="Hashtag">
+      <fields xmi:id="_3OLtYriDEe6xmeNecUD1vQ" type="Long" name="id"/>
+      <fields xmi:id="_3OLtY7iDEe6xmeNecUD1vQ" type="String" name="name"/>
+      <relations xmi:id="_3OLtZLiDEe6xmeNecUD1vQ" name="VMHashtagVideos" type="ManyToMany" primary="false" dataType="Set" fieldName="videos" to="_3OLtXbiDEe6xmeNecUD1vQ"/>
+    </entities>
+    <publishers xsi:type="mm:KafkaPublisher" xmi:id="_3OLtZbiDEe6xmeNecUD1vQ" to="_3OMUT7iDEe6xmeNecUD1vQ" name="videoPosted"/>
+    <publishers xsi:type="mm:KafkaPublisher" xmi:id="_3OLtZriDEe6xmeNecUD1vQ" to="_3OMUULiDEe6xmeNecUD1vQ" name="videoWatched"/>
+    <publishers xsi:type="mm:KafkaPublisher" xmi:id="_3OLtZ7iDEe6xmeNecUD1vQ" to="_3OMUUbiDEe6xmeNecUD1vQ" name="videoLiked"/>
+    <publishers xsi:type="mm:KafkaPublisher" xmi:id="_3OLtaLiDEe6xmeNecUD1vQ" to="_3OMUUriDEe6xmeNecUD1vQ" name="videoDisliked"/>
+    <publishers xsi:type="mm:KafkaPublisher" xmi:id="_3OLtabiDEe6xmeNecUD1vQ" to="_3OMUU7iDEe6xmeNecUD1vQ" name="userCreated"/>
+  </microservices>
+  <microservices xmi:id="_3OLtariDEe6xmeNecUD1vQ" name="trending-microservice">
+    <controllers xmi:id="_3OLta7iDEe6xmeNecUD1vQ" name="TrendsController" path="/trending">
+      <resources xmi:id="_3OLtbLiDEe6xmeNecUD1vQ" name="list" path="/" type="Get"/>
+      <resources xmi:id="_3OLtbbiDEe6xmeNecUD1vQ" name="latestTrend" path="/latest" type="Get"/>
+    </controllers>
+    <entities xmi:id="_3OLtbriDEe6xmeNecUD1vQ" name="Trend">
+      <fields xmi:id="_3OLtb7iDEe6xmeNecUD1vQ" type="Long" name="id"/>
+      <fields xmi:id="_3OLtcLiDEe6xmeNecUD1vQ" type="String" name="top"/>
+      <fields xmi:id="_3OLtcbiDEe6xmeNecUD1vQ" type="String" name="hour"/>
+    </entities>
+    <subscribers xsi:type="mm:KafkaStream" xmi:id="_3OLtcriDEe6xmeNecUD1vQ" from="_3OMUUbiDEe6xmeNecUD1vQ" to="_3OMUVLiDEe6xmeNecUD1vQ" name="HashtagLikedStream"/>
+    <subscribers xsi:type="mm:KafkaStream" xmi:id="_3OLtc7iDEe6xmeNecUD1vQ" from="_3OMUVLiDEe6xmeNecUD1vQ" to="_3OMUVbiDEe6xmeNecUD1vQ" name="TrendingHashtagsStream"/>
+    <subscribers xsi:type="mm:KafkaSubscriber" xmi:id="_3OLtdLiDEe6xmeNecUD1vQ" from="_3OMUVbiDEe6xmeNecUD1vQ" name="updateTrends"/>
+  </microservices>
+  <microservices xmi:id="_3OLtdbiDEe6xmeNecUD1vQ" name="subscription-microservice">
+    <controllers xmi:id="_3OLtdriDEe6xmeNecUD1vQ" name="SubscriptionController" path="/user-subscriptions">
+      <resources xmi:id="_3OLtd7iDEe6xmeNecUD1vQ" name="getUsers" path="/" type="Get"/>
+      <resources xmi:id="_3OLteLiDEe6xmeNecUD1vQ" name="getSubscriptions" path="/{userId}" type="Get">
+        <queryParameters xmi:id="_3OLtebiDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+      </resources>
+      <resources xmi:id="_3OLteriDEe6xmeNecUD1vQ" name="subscribe" path="/{userId}/subscribe" type="Put">
+        <queryParameters xmi:id="_3OLte7iDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+        <queryParameters xmi:id="_3OLtfLiDEe6xmeNecUD1vQ" type="Long" name="hashtagId"/>
+      </resources>
+      <resources xmi:id="_3OLtfbiDEe6xmeNecUD1vQ" name="unsubscribe" path="/{userId}/unsubscribe" type="Put">
+        <queryParameters xmi:id="_3OLtfriDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+        <queryParameters xmi:id="_3OLtf7iDEe6xmeNecUD1vQ" type="Long" name="hashtagId"/>
+      </resources>
+      <resources xmi:id="_3OLtgLiDEe6xmeNecUD1vQ" name="getRecomandationsForHashtag" path="/{userId}/recomandations" type="Get">
+        <queryParameters xmi:id="_3OLtgbiDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+        <queryParameters xmi:id="_3OLtgriDEe6xmeNecUD1vQ" type="Long" name="hashtagId"/>
+      </resources>
+    </controllers>
+    <entities xmi:id="_3OLtg7iDEe6xmeNecUD1vQ" name="User">
+      <fields xmi:id="_3OLthLiDEe6xmeNecUD1vQ" type="Long" name="id"/>
+      <fields xmi:id="_3OLthbiDEe6xmeNecUD1vQ" type="String" name="username"/>
+      <relations xmi:id="_3OLthriDEe6xmeNecUD1vQ" name="SMUserVideos" type="OneToMany" primary="false" dataType="Set" fieldName="videos" to="_3OLtjbiDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLth7iDEe6xmeNecUD1vQ" name="SMUserViewedVideos" type="ManyToMany" primary="true" dataType="Set" fieldName="viewedVideos" to="_3OLtj7iDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtiLiDEe6xmeNecUD1vQ" name="SMUserSubscriptions" type="ManyToMany" primary="true" dataType="Set" fieldName="subscriptions" to="_3OMUTLiDEe6xmeNecUD1vQ"/>
+    </entities>
+    <entities xmi:id="_3OLtibiDEe6xmeNecUD1vQ" name="Video">
+      <fields xmi:id="_3OLtiriDEe6xmeNecUD1vQ" type="Long" name="id"/>
+      <fields xmi:id="_3OLti7iDEe6xmeNecUD1vQ" type="String" name="title"/>
+      <fields xmi:id="_3OLtjLiDEe6xmeNecUD1vQ" type="Long" name="views"/>
+      <relations xmi:id="_3OLtjbiDEe6xmeNecUD1vQ" name="SMVideoUser" type="ManyToOne" primary="true" fieldName="user" to="_3OLthriDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtjriDEe6xmeNecUD1vQ" name="SMVideoHashtags" type="ManyToMany" primary="true" dataType="Set" fieldName="hashtags" to="_3OLtk7iDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtj7iDEe6xmeNecUD1vQ" name="SMVideoViewedBy" type="ManyToMany" primary="false" dataType="Set" fieldName="viewedBy" to="_3OLth7iDEe6xmeNecUD1vQ"/>
+    </entities>
+    <entities xmi:id="_3OLtkLiDEe6xmeNecUD1vQ" name="Hashtag">
+      <fields xmi:id="_3OLtkbiDEe6xmeNecUD1vQ" type="Long" name="id"/>
+      <fields xmi:id="_3OLtkriDEe6xmeNecUD1vQ" type="String" name="name"/>
+      <relations xmi:id="_3OLtk7iDEe6xmeNecUD1vQ" name="SMHashtagVideos" type="ManyToMany" primary="false" dataType="Set" fieldName="videos" to="_3OLtjriDEe6xmeNecUD1vQ"/>
+      <relations xmi:id="_3OLtlLiDEe6xmeNecUD1vQ" name="SMHashtagSubscribers" type="ManyToMany" primary="false" dataType="Set" fieldName="subscribers" to="_3OMUSLiDEe6xmeNecUD1vQ"/>
+    </entities>
+    <publishers xsi:type="mm:KafkaPublisher" xmi:id="_3OLtlbiDEe6xmeNecUD1vQ" to="_3OMUVriDEe6xmeNecUD1vQ" name="userSubscribed"/>
+    <publishers xsi:type="mm:KafkaPublisher" xmi:id="_3OLtlriDEe6xmeNecUD1vQ" to="_3OMUV7iDEe6xmeNecUD1vQ" name="userUnsubscribed"/>
+    <subscribers xsi:type="mm:KafkaSubscriber" xmi:id="_3OLtl7iDEe6xmeNecUD1vQ" from="_3OMUU7iDEe6xmeNecUD1vQ" name="userCreated"/>
+    <subscribers xsi:type="mm:KafkaSubscriber" xmi:id="_3OLtmLiDEe6xmeNecUD1vQ" from="_3OMUT7iDEe6xmeNecUD1vQ" name="videoPosted"/>
+    <subscribers xsi:type="mm:KafkaSubscriber" xmi:id="_3OMUQLiDEe6xmeNecUD1vQ" from="_3OMUULiDEe6xmeNecUD1vQ" name="videoViewed"/>
+  </microservices>
+  <microservices xmi:id="_3OMUQbiDEe6xmeNecUD1vQ" name="hashtag-recommendation-microservice">
+    <controllers xmi:id="_3OMUQriDEe6xmeNecUD1vQ" name="HashtagController">
+      <resources xmi:id="_3OMUQ7iDEe6xmeNecUD1vQ" name="getHashtags" path="/" type="Get"/>
+      <resources xmi:id="_3OMURLiDEe6xmeNecUD1vQ" name="getRecommendedHashtags" path="/{hashtagId}" type="Get">
+        <queryParameters xmi:id="_3OMURbiDEe6xmeNecUD1vQ" type="Long" name="hashtagId"/>
+      </resources>
+    </controllers>
+    <entities xmi:id="_3OMURriDEe6xmeNecUD1vQ" name="User">
+      <fields xmi:id="_3OMUR7iDEe6xmeNecUD1vQ" type="Long" name="id"/>
+      <relations xmi:id="_3OMUSLiDEe6xmeNecUD1vQ" name="SMUserSubscriptions" type="ManyToMany" primary="false" dataType="Set" fieldName="subscriptions" to="_3OMUTLiDEe6xmeNecUD1vQ"/>
+    </entities>
+    <entities xmi:id="_3OMUSbiDEe6xmeNecUD1vQ" name="Hashtag">
+      <fields xmi:id="_3OMUSriDEe6xmeNecUD1vQ" type="Long" name="id"/>
+      <fields xmi:id="_3OMUS7iDEe6xmeNecUD1vQ" type="String" name="name"/>
+      <relations xmi:id="_3OMUTLiDEe6xmeNecUD1vQ" name="SMHashtagSubscribers" type="ManyToMany" primary="true" dataType="Set" fieldName="subscribers" to="_3OMUSLiDEe6xmeNecUD1vQ"/>
+    </entities>
+    <subscribers xsi:type="mm:KafkaSubscriber" xmi:id="_3OMUTbiDEe6xmeNecUD1vQ" from="_3OMUVriDEe6xmeNecUD1vQ" name="userSubscribed"/>
+    <subscribers xsi:type="mm:KafkaSubscriber" xmi:id="_3OMUTriDEe6xmeNecUD1vQ" from="_3OMUV7iDEe6xmeNecUD1vQ" name="userUnsubscribed"/>
+  </microservices>
+  <topics xmi:id="_3OMUT7iDEe6xmeNecUD1vQ" name="video_posted" eventType="_3OMUWLiDEe6xmeNecUD1vQ" publishers="_3OLtZbiDEe6xmeNecUD1vQ" subscribers="_3OLtmLiDEe6xmeNecUD1vQ"/>
+  <topics xmi:id="_3OMUULiDEe6xmeNecUD1vQ" name="video_watched" eventType="_3OMUW7iDEe6xmeNecUD1vQ" publishers="_3OLtZriDEe6xmeNecUD1vQ" subscribers="_3OMUQLiDEe6xmeNecUD1vQ"/>
+  <topics xmi:id="_3OMUUbiDEe6xmeNecUD1vQ" name="video_liked" eventType="_3OMUXriDEe6xmeNecUD1vQ" publishers="_3OLtZ7iDEe6xmeNecUD1vQ" subscribers="_3OLtcriDEe6xmeNecUD1vQ"/>
+  <topics xmi:id="_3OMUUriDEe6xmeNecUD1vQ" name="video_disliked" eventType="_3OMUXriDEe6xmeNecUD1vQ" publishers="_3OLtaLiDEe6xmeNecUD1vQ"/>
+  <topics xmi:id="_3OMUU7iDEe6xmeNecUD1vQ" name="user_created" eventType="_3OMUYbiDEe6xmeNecUD1vQ" publishers="_3OLtabiDEe6xmeNecUD1vQ" subscribers="_3OLtl7iDEe6xmeNecUD1vQ"/>
+  <topics xmi:id="_3OMUVLiDEe6xmeNecUD1vQ" name="hashtag_liked" eventType="_3OMUZLiDEe6xmeNecUD1vQ" publishers="_3OLtcriDEe6xmeNecUD1vQ" subscribers="_3OLtc7iDEe6xmeNecUD1vQ"/>
+  <topics xmi:id="_3OMUVbiDEe6xmeNecUD1vQ" name="trending_hashtags_by_hour" eventType="_3OMUZ7iDEe6xmeNecUD1vQ" publishers="_3OLtc7iDEe6xmeNecUD1vQ" subscribers="_3OLtdLiDEe6xmeNecUD1vQ"/>
+  <topics xmi:id="_3OMUVriDEe6xmeNecUD1vQ" name="user_subscribed" eventType="_3OMUariDEe6xmeNecUD1vQ" publishers="_3OLtlbiDEe6xmeNecUD1vQ" subscribers="_3OMUTbiDEe6xmeNecUD1vQ"/>
+  <topics xmi:id="_3OMUV7iDEe6xmeNecUD1vQ" name="user_unsubscribed" eventType="_3OMUariDEe6xmeNecUD1vQ" publishers="_3OLtlriDEe6xmeNecUD1vQ" subscribers="_3OMUTriDEe6xmeNecUD1vQ"/>
+  <events xmi:id="_3OMUWLiDEe6xmeNecUD1vQ" name="UserVideoEvent" topics="_3OMUT7iDEe6xmeNecUD1vQ">
+    <key xmi:id="_3OMUWbiDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+    <value xmi:id="_3OMUWriDEe6xmeNecUD1vQ" type="VideoDTO" name="dto"/>
+  </events>
+  <events xmi:id="_3OMUW7iDEe6xmeNecUD1vQ" name="UserWatchedEvent" topics="_3OMUULiDEe6xmeNecUD1vQ">
+    <key xmi:id="_3OMUXLiDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+    <value xmi:id="_3OMUXbiDEe6xmeNecUD1vQ" type="Long" name="videoId"/>
+  </events>
+  <events xmi:id="_3OMUXriDEe6xmeNecUD1vQ" name="VideoEvent" topics="_3OMUUbiDEe6xmeNecUD1vQ _3OMUUriDEe6xmeNecUD1vQ">
+    <key xmi:id="_3OMUX7iDEe6xmeNecUD1vQ" type="Long" name="videoId"/>
+    <value xmi:id="_3OMUYLiDEe6xmeNecUD1vQ" type="VideoDTO" name="dto"/>
+  </events>
+  <events xmi:id="_3OMUYbiDEe6xmeNecUD1vQ" name="UserEvent" topics="_3OMUU7iDEe6xmeNecUD1vQ">
+    <key xmi:id="_3OMUYriDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+    <value xmi:id="_3OMUY7iDEe6xmeNecUD1vQ" type="UserDTO" name="dto"/>
+  </events>
+  <events xmi:id="_3OMUZLiDEe6xmeNecUD1vQ" name="HashtagLikedEvent" topics="_3OMUVLiDEe6xmeNecUD1vQ">
+    <key xmi:id="_3OMUZbiDEe6xmeNecUD1vQ" type="String" name="hashtagName"/>
+    <value xmi:id="_3OMUZriDEe6xmeNecUD1vQ" type="Long" name="videoId"/>
+  </events>
+  <events xmi:id="_3OMUZ7iDEe6xmeNecUD1vQ" name="TrendingHashtagsByHourEvent" topics="_3OMUVbiDEe6xmeNecUD1vQ">
+    <key xmi:id="_3OMUaLiDEe6xmeNecUD1vQ" type="WindowedIdentifier" name="window"/>
+    <value xmi:id="_3OMUabiDEe6xmeNecUD1vQ" type="LinkedHashMap&lt;String, Integer>" name="top10Trends"/>
+  </events>
+  <events xmi:id="_3OMUariDEe6xmeNecUD1vQ" name="UserSubscriptionEvent" topics="_3OMUVriDEe6xmeNecUD1vQ _3OMUV7iDEe6xmeNecUD1vQ">
+    <key xmi:id="_3OMUa7iDEe6xmeNecUD1vQ" type="Long" name="userId"/>
+    <value xmi:id="_3OMUbLiDEe6xmeNecUD1vQ" type="Hashtag" name="hashtag"/>
+  </events>
+</mm:SocialMediaPlatform>

@@ -1,0 +1,15 @@
+package [%=package%];
+[%=out.startPreserve("/*","*/", "Imports", true)%]
+import io.micronaut.data.annotation.Repository;
+import io.micronaut.data.repository.CrudRepository;
+import uk.ac.york.eng2.assessment.y1234.[%=m.name.toLowerCase.split("-").first()%].domain.*;
+import uk.ac.york.eng2.assessment.y1234.[%=m.name.toLowerCase.split("-").first()%].dto.*;
+[%=out.stopPreserve()%]
+
+@Repository
+public interface [%=classname%] extends CrudRepository<[%=e.name.ftuc()%], Long> {
+	
+	[%=out.startPreserve("/*","*/", "Custom repository methods", true)%]
+	[%=out.stopPreserve()%]
+	
+}

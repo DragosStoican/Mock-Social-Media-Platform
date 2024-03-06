@@ -1,0 +1,29 @@
+micronaut:
+  server:
+    port: 8083
+  application:
+    name: subscriptionMicroservice
+datasources:
+  default:
+    url: jdbc:mariadb://${DB_HOST:`localhost:3306`}/${DB_NAME:hrm}
+    username: ${DB_USER:user}
+    password: ${DB_PASSWORD:usersecret}
+    driver-class-name: org.mariadb.jdbc.Driver
+    db-type: mariadb
+    dialect: MYSQL
+jpa:
+  default:
+    entity-scan:
+      packages:
+        - uk.ac.york.eng2.assessment.y1234.hashtag.domain
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+kafka:
+  bootstrap:
+    servers: ${KAFKA_BOOTSTRAP_SERVERS:`localhost:9094`}
+netty:
+  default:
+    allocator:
+      max-order: 3

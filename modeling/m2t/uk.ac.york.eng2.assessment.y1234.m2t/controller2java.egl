@@ -1,0 +1,22 @@
+package [%=package%];
+
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.annotation.*;
+import uk.ac.york.eng2.assessment.y1234.[%=m.name.toLowerCase.split("-").first()%].dto.*;
+import uk.ac.york.eng2.assessment.y1234.[%=m.name.toLowerCase.split("-").first()%].domain.*;
+
+public interface [%=classname%] {
+
+	[%for (r in c.resources) {%]
+	@[%=r.type%]("[%=r.path%]")
+	public HttpResponse<?> [%=r.name%](
+		[%for (q in r.queryParameters) {%]
+		[%=q.type.ftuc()%] [%=q.name%][%if (hasMore or r.requestType.isDefined()){%],
+		[%}%]
+		[%}%]
+		[%if (r.requestType.isDefined()){%]		@Body [%=r.requestType%] body[%}%]
+		
+	);
+	
+	[%}%]
+}

@@ -1,0 +1,52 @@
+pre {
+	"Starting validation".println();
+}
+
+context SocialMediaPlatform {
+
+	constraint AtLeastOneMicroservice {
+		check: self.microservices.size() >= 1
+		
+		message: "There should be at least one microservice"
+	}
+}
+
+context Microservice {
+
+	constraint AtLeastOneHealthResource {
+		check: self.controllers.exists(c | c.resources.exists(r | 
+			r.type == "Get"
+			and r.queryParameters.isEmpty
+			and r.requestType.isUndefined()))
+		
+		message: "Microservice " + self.name +"needs at least one “health” resource using the HTTP GET method and taking no parameters, for reporting if it is working correctly"
+	}
+}
+
+context Event {
+
+	constraint AtLeastOneEventStream {
+		check: self.topics.size() >= 1
+		
+		message: "Event " + self.name + " should be in at least one event stream"
+	}
+}
+
+context EventStream {
+
+	critique AtLeastOnePublisher {
+		check: self.publishers.size() >= 1
+		
+		message: self.name + " event stream needs to have at least one publisher"
+	}
+	
+	critique AtLeastOneSubscriber {
+		check: self.subscribers.size() >= 1
+		
+		message: self.name + " event stream needs to have at least one subscriber"
+	}
+}
+
+post {
+	"Finished validation".println();
+}

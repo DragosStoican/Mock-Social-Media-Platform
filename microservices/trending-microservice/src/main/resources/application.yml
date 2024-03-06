@@ -1,0 +1,29 @@
+micronaut:
+  server:
+    port: 8081
+  application:
+    name: trendingMicroservice
+datasources:
+  default:
+    url: jdbc:mariadb://${DB_HOST:`localhost:3306`}/${DB_NAME:trending}
+    username: ${DB_USER:user}
+    password: ${DB_PASSWORD:usersecret}
+    driver-class-name: org.mariadb.jdbc.Driver
+    db-type: mariadb
+    dialect: MYSQL
+jpa:
+  default:
+    entity-scan:
+      packages:
+        - uk.ac.york.eng2.assessment.y1234.trending.domain
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+kafka:
+  bootstrap:
+    servers: ${KAFKA_BOOTSTRAP_SERVERS:`localhost:9094`}
+netty:
+  default:
+    allocator:
+      max-order: 3

@@ -1,0 +1,17 @@
+package [%=package%];
+
+import io.micronaut.configuration.kafka.annotation.KafkaClient;
+import io.micronaut.configuration.kafka.annotation.KafkaKey;
+import io.micronaut.configuration.kafka.annotation.Topic;
+import uk.ac.york.eng2.assessment.y1234.[%=m.name.toLowerCase.split("-").first()%].dto.*;
+import uk.ac.york.eng2.assessment.y1234.[%=m.name.toLowerCase.split("-").first()%].domain.*;
+
+@KafkaClient
+public interface [%=classname%] {
+	
+	[%for (p in publishers){%]
+	@Topic("[%=p.to.name%]")
+	public void [%=p.name%](@KafkaKey [%=p.to.eventType.key.type%] [%=p.to.eventType.key.name%], [%=p.to.eventType.value.type%] [%=p.to.eventType.value.name%]);
+	
+	[%}%]
+}

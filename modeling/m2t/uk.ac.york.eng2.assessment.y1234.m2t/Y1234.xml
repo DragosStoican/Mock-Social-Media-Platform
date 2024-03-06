@@ -1,0 +1,11 @@
+<project default="main">
+	<target name="main">
+		<epsilon.emf.loadModel name="Y1234" 
+			modelfile="../../models/uk.ac.york.eng2.assessment.y1234.models/Y1234.model" 
+			metamodeluri="Y1234" read="true" store="false"/>
+		
+		<epsilon.egl src="Y1234.egx" outputroot="../../../microservices/">
+			<model ref="M"/>
+		</epsilon.egl>
+	</target>
+</project>

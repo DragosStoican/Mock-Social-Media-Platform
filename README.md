@@ -1,0 +1,1 @@
+This is a curated version of the project with personal details removed. For a working copy please contact me

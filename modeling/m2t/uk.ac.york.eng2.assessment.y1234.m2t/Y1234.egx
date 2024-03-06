@@ -1,0 +1,111 @@
+pre {
+	var microservices_path = "../../../microservices/";
+	var packages_path = "src/main/java/";
+	var packages_name = "uk/ac/york/eng2/assessment/y1234/";
+}
+
+rule Entity2Java
+
+	transform e : Entity {
+	
+	template : "entity2java.egl"
+	
+	parameters : Map {
+		"m" = e.eContainer(),
+		"package" = packages_name.replace("/", ".") + e.eContainer.name.toLowerCase.split("-").first() + ".domain",
+		"classname" = e.name.ftuc()
+	}
+	
+	target : microservices_path + e.eContainer.name.toLowerCase() + "/" +// Microservice
+			 packages_path + packages_name + e.eContainer.name.toLowerCase.split("-").first() + "/domain/" + // Package  
+			 e.name.ftuc() + ".java" // Filename
+}
+
+rule Controller2Java
+
+	transform c : Controller {
+	
+	template : "controller2java.egl"
+	
+	parameters : Map {
+		"m" = c.eContainer(),
+		"package" = packages_name.replace("/", ".") + c.eContainer.name.toLowerCase.split("-").first() + ".gen",
+		"classname" = c.name.ftuc() + "Interface"
+	}
+	
+	target : microservices_path + c.eContainer.name.toLowercase() + "/" + // Microservice
+			 packages_path + packages_name + c.eContainer.name.toLowerCase.split("-").first() + "/gen/" + // Package
+			 c.name + "Interface.java" // Filename
+	
+}
+
+rule KafkaPublisher2Java
+
+	transform m : Microservice {
+	
+	guard : m.publishers.exists(s | s.isTypeOf(KafkaPublisher))
+	
+	template : "kafkapublisher2java.egl"
+	
+	parameters : Map {
+		"publishers" = m.publishers.select(s | s.isTypeOf(KafkaPublisher)),
+		"package" = packages_name.replace("/", ".") + m.name.toLowerCase.split("-").first() + ".events",
+		"classname" =  m.name.toLowerCase.split("-").first().ftuc() + "Producer"
+	}
+	
+	target : microservices_path + m.name.toLowercase() + "/" + // Microservice
+			 packages_path + packages_name + m.name.toLowerCase.split("-").first() + "/events/" + // Package
+			 m.name.toLowerCase.split("-").first().ftuc() + "Producer.java" // Filename
+}
+
+rule KafkaSubscriber2Java
+	
+	transform m : Microservice {
+	
+	guard : m.subscribers.exists(s | s.isTypeOf(KafkaSubscriber))
+	
+	template : "kafkasubscriber2java.egl"
+	
+	parameters : Map {
+		"subscribers" = m.subscribers.select(s | s.isTypeOf(KafkaSubscriber)),
+		"package" = packages_name.replace("/", ".") + m.name.toLowerCase.split("-").first() + ".events",
+		"classname" =  m.name.toLowerCase.split("-").first().ftuc() + "Consumer"
+	}
+	
+	target : microservices_path + m.name.toLowercase() + "/" + // Microservice
+			 packages_path + packages_name + m.name.toLowerCase.split("-").first() + "/events/" + // Package
+			 m.name.toLowerCase.split("-").first().ftuc() + "Consumer.java" // Filename
+}
+
+rule KafkaStreams2Java
+	
+	transform s : KafkaStream {
+	
+	template : "kafkastream2java.egl"
+	
+	parameters : Map {
+		"package" = packages_name.replace("/", ".") + s.eContainer.name.toLowerCase.split("-").first() + ".events",
+		"classname" =  s.name.ftuc()
+	}
+	
+	target : microservices_path + s.eContainer.name.toLowercase() + "/" + // Microservice
+			 packages_path + packages_name + s.eContainer.name.toLowerCase.split("-").first() + "/events/" + // Package
+			 s.name + ".java" // Filename
+}
+
+rule Entity2Repository
+
+	transform e : Entity {
+	
+	template : "entity2repository.egl"
+	
+	parameters : Map {
+		"m" = e.eContainer(),
+		"package" = packages_name.replace("/", ".") + e.eContainer.name.toLowerCase.split("-").first() + ".repositories",
+		"classname" = e.name.ftuc() + "Repository"
+	}
+	
+	target : microservices_path + e.eContainer.name.toLowerCase() + "/" +// Microservice
+			 packages_path + packages_name + e.eContainer.name.toLowerCase.split("-").first() + "/repositories/" + // Package  
+			 e.name.ftuc() + "Repository.java" // Filename
+}

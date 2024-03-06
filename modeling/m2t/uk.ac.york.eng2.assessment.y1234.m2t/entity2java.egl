@@ -1,0 +1,64 @@
+package [%=package%];
+[%=out.startPreserve("/*","*/", "Imports", true)%]
+import java.util.*;
+import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.micronaut.serde.annotation.Serdeable;
+[%=out.stopPreserve()%]
+
+
+@Entity
+@Serdeable
+public class [%=classname%] {
+	
+	// Generated fields
+	[%for (f in e.fields) {%]
+	[%=out.startPreserve("/*","*/", f.name + " annotations", true)%]
+	[%if (f.name == "id") {%]
+	@Id
+	@GeneratedValue
+	[%}%]
+	[%else {%]
+	@Column(nullable = false)
+	[%}%]
+	[%=out.stopPreserve()%]
+	private [%=f.type%] [%=f.name%];
+	
+	[%}%]
+	// Generated relations
+	[%for (r in e.relations) {%]
+	@JsonIgnore
+	[%if (r.primary) {%]
+	@JoinTable(name="[%=r.fieldName + "_" + r.to.fieldName%]")
+	[%}%]
+	@[%=r.type%][%if (not r.primary) {%](mappedBy = "[%=r.to.fieldName%]")[%}%]
+	
+	private [%if (r.dataType.isDefined()){%][%=r.dataType%]<[%=r.to.eContainer.name.ftuc()%]>[%}%][%else%][%=r.to.eContainer.name.ftuc()%] [%=r.fieldName%];
+	
+	[%}%]
+	// Generated getters/setters
+	[%for (f in e.fields) {%]
+	public [%=f.type%] get[%=f.name.ftuc()%]() {
+		return [%=f.name%];
+	}
+	
+	public void set[%=f.name.ftuc()%]([%=f.type%] [%=f.name%]) {
+		this.[%=f.name%] = [%=f.name%];
+	}
+	
+	[%}%]
+	[%for (r in e.relations) {%]
+	public [%if (r.dataType.isDefined()){%][%=r.dataType%]<[%=r.to.eContainer.name.ftuc()%]>[%}%][%else%][%=r.to.eContainer.name.ftuc()%] get[%=r.fieldName.ftuc()%]() {
+		return [%=r.fieldName%];
+	}
+	
+	public void set[%=r.fieldName.ftuc()%]([%if (r.dataType.isDefined()){%][%=r.dataType%]<[%=r.to.eContainer.name.ftuc()%]>[%}%][%else%][%=r.to.eContainer.name.ftuc()%] [%=r.fieldName%]) {
+		this.[%=r.fieldName%] = [%=r.fieldName%];
+	}
+	[%}%]
+	
+	[%=out.startPreserve("/*","*/", "Additional methods", true)%]
+	// Any other methods required go here
+	
+	[%=out.stopPreserve()%]
+}

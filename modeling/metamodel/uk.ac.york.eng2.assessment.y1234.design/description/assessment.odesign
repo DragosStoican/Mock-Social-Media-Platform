@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" name="assessment" version="12.0.0.2017041100">
+  <ownedViewpoints name="Assessment Viewpoint" modelFileExtension="Y1234">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Assessment diagram" domainClass="SocialMediaPlatform" enablePopupBars="true">
+      <metamodel href="Y1234#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="EventStreamNode" domainClass="Y1234::EventStream">
+          <style xsi:type="style:EllipseNodeDescription" labelSize="24" sizeComputationExpression="20" labelPosition="node" resizeKind="EAST_WEST">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="RelationMapping" sourceMapping="//@ownedViewpoints[name='Assessment%20Viewpoint']/@ownedRepresentations[name='Assessment%20diagram']/@defaultLayer/@containerMappings[name='MicroserviceContainer']/@subContainerMappings[name='EntityContainer']/@subNodeMappings[name='RelationNode']" targetMapping="//@ownedViewpoints[name='Assessment%20Viewpoint']/@ownedRepresentations[name='Assessment%20diagram']/@defaultLayer/@containerMappings[name='MicroserviceContainer']/@subContainerMappings[name='EntityContainer']/@subNodeMappings[name='RelationNode']" targetFinderExpression="feature:to" pathExpression="feature:type">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="KafkaRelation" sourceMapping="//@ownedViewpoints[name='Assessment%20Viewpoint']/@ownedRepresentations[name='Assessment%20diagram']/@defaultLayer/@containerMappings[name='MicroserviceContainer']/@subNodeMappings[name='PublisherNode']" targetMapping="//@ownedViewpoints[name='Assessment%20Viewpoint']/@ownedRepresentations[name='Assessment%20diagram']/@defaultLayer/@nodeMappings[name='EventStreamNode']" targetFinderExpression="feature:to">
+          <style sizeComputationExpression="3">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="SubscriberMappings" sourceMapping="//@ownedViewpoints[name='Assessment%20Viewpoint']/@ownedRepresentations[name='Assessment%20diagram']/@defaultLayer/@nodeMappings[name='EventStreamNode']" targetMapping="//@ownedViewpoints[name='Assessment%20Viewpoint']/@ownedRepresentations[name='Assessment%20diagram']/@defaultLayer/@containerMappings[name='MicroserviceContainer']/@subNodeMappings[name='SubscriberNode'] //@ownedViewpoints[name='Assessment%20Viewpoint']/@ownedRepresentations[name='Assessment%20diagram']/@defaultLayer/@nodeMappings[name='EventStreamNode']" targetFinderExpression="feature:subscribers">
+          <style sizeComputationExpression="3">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="MicroserviceContainer" domainClass="Microservice">
+          <subNodeMappings name="PublisherNode" semanticCandidatesExpression="feature:eAllContents" domainClass="Publisher">
+            <style xsi:type="style:LozengeNodeDescription" labelSize="24" showIcon="false" sizeComputationExpression="24" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="SubscriberNode" semanticCandidatesExpression="feature:eAllContents" domainClass="Subscriber">
+            <style xsi:type="style:LozengeNodeDescription" labelSize="24" showIcon="false" sizeComputationExpression="24" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
+            </style>
+          </subNodeMappings>
+          <subContainerMappings name="ControllerContainer" semanticCandidatesExpression="feature:eAllContents" domainClass="Controller" childrenPresentation="List">
+            <subNodeMappings name="ResourceNode" semanticCandidatesExpression="feature:eAllContents" domainClass="Y1234::Resource">
+              <style xsi:type="style:SquareDescription" labelSize="24" showIcon="false" sizeComputationExpression="24" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="30" showIcon="false">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+            </style>
+          </subContainerMappings>
+          <subContainerMappings name="EntityContainer" semanticCandidatesExpression="feature:eAllContents" domainClass="Entity" childrenPresentation="List">
+            <subNodeMappings name="JavaVarNode" semanticCandidatesExpression="feature:eAllContents" domainClass="JavaVar">
+              <style xsi:type="style:SquareDescription" labelSize="24" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+              </style>
+            </subNodeMappings>
+            <subNodeMappings name="RelationNode" semanticCandidatesExpression="feature:eAllContents" domainClass="Relation">
+              <style xsi:type="style:SquareDescription" labelSize="24" labelExpression="feature:fieldName" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="30" showIcon="false">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subContainerMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="36" showIcon="false" roundedCorner="true" widthComputationExpression="10" heightComputationExpression="10">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelFormat>bold</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='yellow']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
+          </style>
+        </containerMappings>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="uk.ac.york.eng2.assessment.design.Services"/>
+  </ownedViewpoints>
+</description:Group>

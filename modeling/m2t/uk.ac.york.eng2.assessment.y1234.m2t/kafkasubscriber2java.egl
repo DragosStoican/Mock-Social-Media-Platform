@@ -1,0 +1,26 @@
+package [%=package%];
+[%=out.startPreserve("/*","*/", "Imports", true)%]
+import java.util.LinkedHashMap;
+
+import io.micronaut.configuration.kafka.annotation.KafkaKey;
+import io.micronaut.configuration.kafka.annotation.KafkaListener;
+import io.micronaut.configuration.kafka.annotation.Topic;
+import uk.ac.york.eng2.assessment.y1234.[%=m.name.toLowerCase.split("-").first()%].domain.*;
+import uk.ac.york.eng2.assessment.y1234.[%=m.name.toLowerCase.split("-").first()%].dto.*;
+[%=out.stopPreserve()%]
+
+@KafkaListener(groupId = "[%=m.name.toLowercase.split("-").first%]-consumers")
+public class [%=classname%] {
+	[%=out.startPreserve("/*","*/", "Extra fields/methods", true)%]
+	[%=out.stopPreserve()%]
+	
+	[%for (s in subscribers){%]
+	[%=out.startPreserve("/*","*/", "Consumer " + s.name + " logic", true)%]
+	@Topic("[%=s.from.name%]")
+	public void [%=s.name%](@KafkaKey [%=s.from.eventType.key.type%] [%=s.from.eventType.key.name%], [%=s.from.eventType.value.type%] [%=s.from.eventType.value.name%]) {
+		
+	}
+	[%=out.stopPreserve()%]
+	
+	[%}%]
+}

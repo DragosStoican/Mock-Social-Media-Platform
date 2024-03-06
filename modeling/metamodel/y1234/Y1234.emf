@@ -1,0 +1,86 @@
+@namespace(uri="Y1234", prefix="mm")
+package Y1234;
+
+class SocialMediaPlatform {
+	attr String name;
+	val Microservice[*] microservices;
+	val EventStream[*] topics;
+	val Event[*] events;
+}
+
+class Microservice {
+	attr String name;
+	val Controller[*] controllers;
+	val Entity[*] entities;
+	val Publisher[*] publishers;
+	val Subscriber[*] subscribers;
+}
+
+abstract class Publisher {
+	ref EventStream#publishers to;
+}
+
+abstract class Subscriber {
+	ref EventStream#subscribers from;
+}
+
+class KafkaPublisher extends Publisher {
+	attr String name;
+}
+
+class KafkaSubscriber extends Subscriber {
+	attr String name;
+}
+
+class KafkaStream extends Subscriber,Publisher {
+	attr String name;
+}
+
+class EventStream {
+	attr String name;
+	ref Event#topics eventType;
+	ref Publisher[*]#to publishers;
+	ref Subscriber[*]#from subscribers;
+}
+
+class Event {
+	attr String name;
+	val JavaVar key;
+	val JavaVar value;
+	ref EventStream[*]#eventType topics;
+}
+
+class Controller {
+	attr String name;
+	attr String path;
+	val Resource[*] resources;
+}
+
+class Resource {
+	attr String name;
+	attr String path;
+	attr String type;
+	val JavaVar[*] queryParameters;
+	attr String requestType; // HTTP Method body
+}
+
+class JavaVar {
+	attr String type;
+	attr String name;
+}
+
+class Entity { // i.e Database tables
+	attr String name;
+	val JavaVar[*] fields; // i.e columns
+	val Relation[*] relations; // i.e table relations
+}
+
+class Relation {
+	attr String name;
+	attr String type;
+	attr Boolean primary; // Primary entity is the one that creates the relation (not "mappedBy")
+	attr String ~dataType;
+	attr String fieldName;
+	ref Relation to;
+}
+

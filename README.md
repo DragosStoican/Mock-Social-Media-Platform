@@ -1,4 +1,4 @@
-This is a curated version of the project with personal details removed. For a working copy please contact me
+This is a curated version of the project. For a working copy please contact me
 
 ![image](https://github.com/user-attachments/assets/3a0ecdca-7e65-4d50-92fb-359ee708c78b)
 
